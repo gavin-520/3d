@@ -17,89 +17,10 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("开奖接口") {
-                    ForEach(LotteryKind.allCases) { lottery in
-                        Button {
-                            selectedLottery = lottery
-                            showingAPI = true
-                        } label: {
-                            HStack {
-                                Label(lottery.displayName, systemImage: "network")
-                                Spacer()
-                                let configuration = ProviderSettingsStore.configuration(for: lottery)
-                                Text(configuration.endpointTemplate.isEmpty ? "未配置" : "已配置")
-                                    .font(.caption)
-                                    .foregroundStyle(configuration.endpointTemplate.isEmpty ? .secondary : .green)
-                            }
-                        }
-                    }
-                }
-
-                Section("规则") {
-                    NavigationLink {
-                        RuleSettingsView()
-                    } label: {
-                        Label("玩法与赔率", systemImage: "slider.horizontal.3")
-                    }
-                    Text("\(rules.filter(\.enabled).count) 条启用规则 · 每个彩种一套")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-
-                Section("数据管理") {
-                    Button {
-                        startExport(type: .json)
-                    } label: {
-                        Label("导出 JSON 备份", systemImage: "square.and.arrow.up")
-                    }
-                    Button {
-                        startExport(type: .commaSeparatedText)
-                    } label: {
-                        Label("导出投注 CSV", systemImage: "tablecells")
-                    }
-                    Button {
-                        showingImporter = true
-                    } label: {
-                        Label("导入 JSON / CSV", systemImage: "square.and.arrow.down")
-                    }
-                    .fileImporter(
-                        isPresented: $showingImporter,
-                        allowedContentTypes: [.json, .commaSeparatedText]
-                    ) { result in
-                        switch result {
-                        case .success(let url):
-                            do {
-                                let data = try Data(contentsOf: url)
-                                if url.pathExtension.lowercased() == "csv" {
-                                    try ExportService.importCSV(data, context: modelContext)
-                                } else {
-                                    try ExportService.importData(data, context: modelContext)
-                                }
-                                message = "导入完成"
-                            } catch {
-                                message = error.localizedDescription
-                            }
-                        case .failure(let error):
-                            message = error.localizedDescription
-                        }
-                    }
-
-                    if !message.isEmpty {
-                        Text(message)
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-                }
-
-                Section {
-                    Button(role: .destructive) {
-                        clearAll()
-                    } label: {
-                        Label("清空本机数据", systemImage: "trash")
-                    }
-                } footer: {
-                    Text("投注与开奖记录仅保存在本机；接口 token 使用系统 Keychain 保存。")
-                }
+                apiSettingsSection
+                rulesSection
+                dataManagementSection
+                clearDataSection
             }
             .navigationTitle("设置")
             .sheet(isPresented: $showingAPI) {
@@ -113,6 +34,113 @@ struct SettingsView: View {
             ) { result in
                 if case .failure(let error) = result { message = error.localizedDescription }
             }
+        }
+    }
+
+    private var apiSettingsSection: some View {
+        Section("开奖接口") {
+            ForEach(LotteryKind.allCases) { lottery in
+                apiSettingsRow(for: lottery)
+            }
+        }
+    }
+
+    private func apiSettingsRow(for lottery: LotteryKind) -> some View {
+        let configuration = ProviderSettingsStore.configuration(for: lottery)
+        return Button {
+            selectedLottery = lottery
+            showingAPI = true
+        } label: {
+            HStack {
+                Label(lottery.displayName, systemImage: "network")
+                Spacer()
+                Text(configuration.endpointTemplate.isEmpty ? "未配置" : "已配置")
+                    .font(.caption)
+                    .foregroundStyle(configuration.endpointTemplate.isEmpty ? .secondary : .green)
+            }
+        }
+    }
+
+    private var rulesSection: some View {
+        Section("规则") {
+            NavigationLink {
+                RuleSettingsView()
+            } label: {
+                Label("玩法与赔率", systemImage: "slider.horizontal.3")
+            }
+            Text("\(enabledRuleCount) 条启用规则 · 每个彩种一套")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    private var enabledRuleCount: Int {
+        rules.filter(\.enabled).count
+    }
+
+    private var dataManagementSection: some View {
+        Section("数据管理") {
+            Button {
+                startExport(type: .json)
+            } label: {
+                Label("导出 JSON 备份", systemImage: "square.and.arrow.up")
+            }
+            Button {
+                startExport(type: .commaSeparatedText)
+            } label: {
+                Label("导出投注 CSV", systemImage: "tablecells")
+            }
+            importButton
+            if !message.isEmpty {
+                Text(message)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+
+    private var importButton: some View {
+        Button {
+            showingImporter = true
+        } label: {
+            Label("导入 JSON / CSV", systemImage: "square.and.arrow.down")
+        }
+        .fileImporter(
+            isPresented: $showingImporter,
+            allowedContentTypes: [.json, .commaSeparatedText]
+        ) { result in
+            handleImportResult(result)
+        }
+    }
+
+    private func handleImportResult(_ result: Result<URL, Error>) {
+        switch result {
+        case .success(let url):
+            do {
+                let data = try Data(contentsOf: url)
+                if url.pathExtension.lowercased() == "csv" {
+                    try ExportService.importCSV(data, context: modelContext)
+                } else {
+                    try ExportService.importData(data, context: modelContext)
+                }
+                message = "导入完成"
+            } catch {
+                message = error.localizedDescription
+            }
+        case .failure(let error):
+            message = error.localizedDescription
+        }
+    }
+
+    private var clearDataSection: some View {
+        Section {
+            Button(role: .destructive) {
+                clearAll()
+            } label: {
+                Label("清空本机数据", systemImage: "trash")
+            }
+        } footer: {
+            Text("投注与开奖记录仅保存在本机；接口 token 使用系统 Keychain 保存。")
         }
     }
 
