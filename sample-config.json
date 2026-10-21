@@ -1,0 +1,8 @@
+{
+  "name": "LotteryLedger",
+  "version": "1.0.0",
+  "minimumOS": "iOS 17",
+  "lotteries": ["福彩3D", "排列3"],
+  "data": "SwiftData local storage",
+  "draws": "Configurable JSON API with manual fallback"
+}

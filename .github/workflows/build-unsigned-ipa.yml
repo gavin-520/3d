@@ -1,0 +1,43 @@
+name: Build iOS IPA
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Build for iPhone
+        run: >-
+          xcodebuild
+          -project LotteryLedger.xcodeproj
+          -scheme LotteryLedger
+          -configuration Release
+          -sdk iphoneos
+          -destination 'generic/platform=iOS'
+          -derivedDataPath build
+          CODE_SIGNING_ALLOWED=NO
+          CODE_SIGNING_REQUIRED=NO
+          CODE_SIGN_IDENTITY=""
+          build
+
+      - name: Package unsigned IPA
+        run: |
+          mkdir -p package/Payload
+          cp -R build/Build/Products/Release-iphoneos/LotteryLedger.app package/Payload/
+          cd package
+          /usr/bin/zip -qry ../LotteryLedger-unsigned.ipa Payload
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LotteryLedger-unsigned-ipa
+          path: LotteryLedger-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 7

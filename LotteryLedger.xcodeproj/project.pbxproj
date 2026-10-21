@@ -1,0 +1,97 @@
+{
+ archiveVersion = 1;
+ classes = {};
+ objectVersion = 77;
+ objects = {
+  000000000000000000000001 /* Project object */ = {
+   isa = PBXProject;
+   attributes = { LastUpgradeCheck = 1600; };
+   buildConfigurationList = 000000000000000000000018 /* Project config list */;
+   compatibilityVersion = "Xcode 16.0";
+   developmentRegion = en;
+   hasScannedForEncodings = 0;
+   knownRegions = (en, Base);
+   mainGroup = 000000000000000000000004;
+   productRefGroup = 000000000000000000000007;
+   projectDirPath = "";
+   projectRoot = "";
+   targets = (
+    000000000000000000000008 /* LotteryLedger */,
+    000000000000000000000009 /* LotteryLedgerTests */,
+   );
+  };
+  000000000000000000000002 /* LotteryLedger.app */ = { isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LotteryLedger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+  000000000000000000000003 /* LotteryLedgerTests.xctest */ = { isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LotteryLedgerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+  000000000000000000000004 /* Main group */ = {
+   isa = PBXGroup;
+   children = (
+    000000000000000000000005 /* LotteryLedger */,
+    000000000000000000000006 /* LotteryLedgerTests */,
+    000000000000000000000007 /* Products */,
+   );
+   sourceTree = "<group>";
+  };
+  000000000000000000000005 /* LotteryLedger */ = { isa = PBXFileSystemSynchronizedRootGroup; path = LotteryLedger; sourceTree = "<group>"; };
+  000000000000000000000006 /* LotteryLedgerTests */ = { isa = PBXFileSystemSynchronizedRootGroup; path = LotteryLedgerTests; sourceTree = "<group>"; };
+  000000000000000000000007 /* Products */ = {
+   isa = PBXGroup;
+   children = (
+    000000000000000000000002 /* LotteryLedger.app */,
+    000000000000000000000003 /* LotteryLedgerTests.xctest */,
+   );
+   name = Products;
+   sourceTree = "<group>";
+  };
+  000000000000000000000008 /* LotteryLedger */ = {
+   isa = PBXNativeTarget;
+   buildConfigurationList = 000000000000000000000019 /* App config list */;
+   buildPhases = (
+    000000000000000000000010 /* Sources */,
+    000000000000000000000011 /* Frameworks */,
+    000000000000000000000012 /* Resources */,
+   );
+   buildRules = ();
+   dependencies = ();
+   fileSystemSynchronizedGroups = (000000000000000000000005 /* LotteryLedger */,);
+   name = LotteryLedger;
+   productName = LotteryLedger;
+   productReference = 000000000000000000000002 /* LotteryLedger.app */;
+   productType = "com.apple.product-type.application";
+  };
+  000000000000000000000009 /* LotteryLedgerTests */ = {
+   isa = PBXNativeTarget;
+   buildConfigurationList = 00000000000000000000001A /* Test config list */;
+   buildPhases = (
+    000000000000000000000013 /* Sources */,
+    000000000000000000000014 /* Frameworks */,
+    000000000000000000000015 /* Resources */,
+   );
+   buildRules = ();
+   dependencies = (000000000000000000000017 /* App target dependency */,);
+   fileSystemSynchronizedGroups = (000000000000000000000006 /* LotteryLedgerTests */,);
+   name = LotteryLedgerTests;
+   productName = LotteryLedgerTests;
+   productReference = 000000000000000000000003 /* LotteryLedgerTests.xctest */;
+   productType = "com.apple.product-type.bundle.unit-test";
+  };
+  000000000000000000000010 /* Sources */ = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+  000000000000000000000011 /* Frameworks */ = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+  000000000000000000000012 /* Resources */ = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+  000000000000000000000013 /* Sources */ = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+  000000000000000000000014 /* Frameworks */ = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+  000000000000000000000015 /* Resources */ = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+  000000000000000000000016 /* Container proxy */ = { isa = PBXContainerItemProxy; containerPortal = 000000000000000000000001 /* Project object */; proxyType = 1; remoteGlobalIDString = 000000000000000000000008; remoteInfo = LotteryLedger; };
+  000000000000000000000017 /* App target dependency */ = { isa = PBXTargetDependency; target = 000000000000000000000008 /* LotteryLedger */; targetProxy = 000000000000000000000016 /* Container proxy */; };
+  000000000000000000000018 /* Project config list */ = { isa = XCConfigurationList; buildConfigurations = (00000000000000000000001B /* Debug */, 00000000000000000000001C /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+  000000000000000000000019 /* App config list */ = { isa = XCConfigurationList; buildConfigurations = (00000000000000000000001D /* Debug */, 00000000000000000000001E /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+  00000000000000000000001A /* Test config list */ = { isa = XCConfigurationList; buildConfigurations = (00000000000000000000001F /* Debug */, 000000000000000000000020 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+  00000000000000000000001B /* Project Debug */ = { isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SWIFT_VERSION = 5.0; }; name = Debug; };
+  00000000000000000000001C /* Project Release */ = { isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SWIFT_VERSION = 5.0; }; name = Release; };
+  00000000000000000000001D /* App Debug */ = { isa = XCBuildConfiguration; buildSettings = { CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = "彩票账本"; IPHONEOS_DEPLOYMENT_TARGET = 17.0; PRODUCT_BUNDLE_IDENTIFIER = com.codex.LotteryLedger; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Debug; };
+  00000000000000000000001E /* App Release */ = { isa = XCBuildConfiguration; buildSettings = { CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = "彩票账本"; IPHONEOS_DEPLOYMENT_TARGET = 17.0; PRODUCT_BUNDLE_IDENTIFIER = com.codex.LotteryLedger; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
+  00000000000000000000001F /* Test Debug */ = { isa = XCBuildConfiguration; buildSettings = { BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_STYLE = Automatic; GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; PRODUCT_BUNDLE_IDENTIFIER = com.codex.LotteryLedgerTests; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LotteryLedger.app/LotteryLedger"; }; name = Debug; };
+  000000000000000000000020 /* Test Release */ = { isa = XCBuildConfiguration; buildSettings = { BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_STYLE = Automatic; GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; PRODUCT_BUNDLE_IDENTIFIER = com.codex.LotteryLedgerTests; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LotteryLedger.app/LotteryLedger"; }; name = Release; };
+ };
+ rootObject = 000000000000000000000001 /* Project object */;
+}
+
