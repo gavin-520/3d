@@ -56,7 +56,7 @@ struct SettingsView: View {
                 Spacer()
                 Text(configuration.endpointTemplate.isEmpty ? "未配置" : "已配置")
                     .font(.caption)
-                    .foregroundStyle(configuration.endpointTemplate.isEmpty ? .secondary : .green)
+                    .foregroundStyle(configuration.endpointTemplate.isEmpty ? Color.secondary : Color.green)
             }
         }
     }
